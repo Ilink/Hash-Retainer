@@ -4,16 +4,18 @@ This function allows one to update the URL hash without disrupting any other par
 
 var Hash_retainer = function(options){
     var build_tab_hash = function(property, value, hash){
-        if(hash.substr(0,1) === '&'){
-            hash = hash.substr(1, hash.length);
+        if(typeof typeof hash !== 'undefined') {
+            if(hash.substr(0,1) === '&'){
+                hash = hash.substr(1, hash.length);
+            }
+            if(hash !== ''){
+                hash = '#'+property + "=" + value + '&' + hash;
+            }
+            else {
+                hash = '#'+property + "=" + value;
+            }
+            return hash;
         }
-        if(typeof hash !== 'undefined' && hash !== ''){
-            hash = '#'+property + "=" + value + '&' + hash;
-        }
-        else {
-            hash = '#'+property + "=" + value;
-        }
-        return hash;
     }
 
     var prior_tab_hash = function(hash, value){
